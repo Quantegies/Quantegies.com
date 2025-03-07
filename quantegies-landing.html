@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantegies | AI-Powered High Frequency Trading</title>
+    <style>
+        :root {
+            --primary: #0066FF;
+            --secondary: #00AAFF;
+            --accent: #00C2FF;
+            --dark: #1A1A2E;
+            --white: #FFFFFF;
+            --light-gray: #F7F9FC;
+            --gray: #EEF2F6;
+            --text: #2D3748;
+            --text-light: #718096;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--white);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 102, 255, 0.1);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 100px 0;
+            background: var(--light-gray);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--light-gray);
+            z-index: -1;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 102, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 102, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.1;
+            }
+            25% {
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0.2;
+            }
+            75% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.1;
+            }
+        }
+
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            line-height: (1.5);
+            margin-bottom: 40px;
+            color: var(--text-light);
+        }
+
+        .stats-card {
+            display: flex;
+            background: var(--white);
+            border: 1px solid rgba(0, 102, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 50px;
+            max-width: 600px;
+            justify-content: space-between;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 60px;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border: 1px solid rgba(0, 102, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            color: var(--white);
+        }
+
+        .feature-icon svg {
+            width: 30px;
+            height: 30px;
+            color: var(--white);
+        }
+
+        .feature-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .feature-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        /* Mission Section */
+        .mission {
+            padding: 120px 0;
+            position: relative;
+            background: var(--gray);
+        }
+
+        .mission-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .mission-text {
+            flex: 1;
+        }
+
+        .mission-title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .mission-description {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+
+        .mission-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(0, 229, 255, 0.2));
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--white);
+        }
+
+        .cta-container {
+            background: linear-gradient(135deg, var(--light-gray), var(--gray));
+            border: 1px solid rgba(0, 102, 255, 0.1);
+            border-radius: 20px;
+            padding: 60px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .cta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .cta-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .cta-text {
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--text-light);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: var(--primary);
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid var(--primary);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .secondary-button:hover {
+            background: rgba(0, 102, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--white);
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(0, 102, 255, 0.1);
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-info {
+            max-width: 300px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .footer-description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copyright {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 900px) {
+            .hero-title {
+                font-size: 42px;
+            }
+            
+            .mission-content {
+                flex-direction: column;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .stats-card {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">Q</div>
+                Quantegies
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Investor Relations</a></li>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="#" class="cta-button">Learn More</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="grid-overlay"></div>
+        <div class="particles">
+            <div class="particle" style="width: 10px; height: 10px; top: 20%; left: 10%;"></div>
+            <div class="particle" style="width: 15px; height: 15px; top: 50%; left: 25%; animation-delay: 3s;"></div>
+            <div class="particle" style="width: 8px; height: 8px; top: 30%; left: 60%; animation-delay: 6s;"></div>
+            <div class="particle" style="width: 12px; height: 12px; top: 70%; left: 70%; animation-delay: 9s;"></div>
+            <div class="particle" style="width: 6px; height: 6px; top: 40%; left: 85%; animation-delay: 1s;"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Empowering the Future of Trading with AI—Executed at Lightning Speed</h1>
+                <p class="hero-subtitle">Quantegies is revolutionizing HFT with proprietary AI models executing thousands of trades per session.</p>
+                <a href="#" class="cta-button">Explore Our Technology</a>
+                
+                <div class="stats-card">
+                    <div class="stat-item">
+                        <div class="stat-number">18,000+</div>
+                        <div class="stat-label">TRADES PER NBC SESSION</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">&lt;1μs</div>
+                        <div class="stat-label">EXECUTION LATENCY</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">AI MODELS IN PRODUCTION</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Our Technology</h2>
+            <p class="section-subtitle">Leveraging cutting-edge AI and high-frequency trading infrastructure to deliver exceptional performance in global markets.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">Q Library™</h3>
+                    <p class="feature-description">Our custom-built Q Library™ drives the core intelligence of our trading models, enabling seamless data processing and on-the-fly optimizations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3 class="feature-title">Proprietary AI Training Software</h3>
+                    <p class="feature-description">Developed to handle massive datasets, our training software refines complex strategies, learning continuously from market fluctuations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">Nanosecond to Microsecond Execution</h3>
+                    <p class="feature-description">Our HFT models can execute trades in nanoseconds to microseconds—leveraging advanced co-location and cutting-edge optimization.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">High Volume Trading</h3>
+                    <p class="feature-description">Taking nearly 18,000 trades per NBC session, Quantegies demonstrates relentless efficiency and scalability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+        <div class="container mission-content">
+            <div class="mission-text">
+                <h2 class="mission-title">Our Mission</h2>
+                <p class="mission-description">At Quantegies, our mission is to merge AI-driven innovation with high-frequency precision to unlock value in the global markets. We strive to pioneer cutting-edge solutions that bring trust, speed, and sophistication to private HFT trading.</p>
+                <p class="mission-description">Our team combines advanced research, machine learning expertise, and deep financial knowledge to create trading solutions that operate at the frontier of what's possible.</p>
+                <a href="#" class="cta-button">Learn More About Us</a>
+            </div>
+            <div class="mission-image">
+                <div class="image-wrapper">
+                    <img src="/api/placeholder/600/400" alt="AI Trading Technology">
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-container">
+                <div class="cta-bg"></div>
+                <h2 class="cta-title">Ready to Revolutionize Your Trading?</h2>
+                <p class="cta-text">Discover how Quantegies can help you leverage the power of AI and high-frequency trading to achieve unprecedented results in today's dynamic markets.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="cta-button">Partner With Us</a>
+                    <a href="#" class="secondary-button">Investor Relations</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <div class="logo-icon">Q</div>
+                        <div class="footer-logo-text">Quantegies</div>
+                    </div>
+                    <p class="footer-description">Revolutionizing high-frequency trading with proprietary AI models and cutting-edge technology.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Our Mission</a></li>
+                        <li><a href="#">Investor Relations</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="#">Email Us</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">© 2025 Quantegies. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple script to handle sticky header behavior
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.05)';
+            }
+        });
+    </script>
+</body>
+</html>
