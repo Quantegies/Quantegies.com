@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quantegies –Transforming data into decision making trades. An all‑in‑one ecosystem bridging institutional‑grade Tools and retail innovation.</title>
+  <meta name="description" content="Transforming data into decision making trades. An all‑in‑one ecosystem bridging institutional‑grade Tools and retail innovation.."/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Tailwind for utility classes used throughout the markup -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Icons & Animation libs -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/framer-motion@11.0.3/dist/framer-motion.js"></script>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Open‑Graph (social share) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Transforming data into decision making trades. An all‑in‑one ecosystem bridging institutional‑grade Tools and retail innovation." />
+  <meta property="og:description" content="AI‑native HFT strategies, proprietary backtesting engine, and Q Founders accelerator." />
+  <meta property="og:image" content="/og-card.png" />
+
+  <style>
+    :root {
+      --bg-light: #F5F7FA;
+      --bg-dark: #0A0A0A;
+      --accent: #4F46E5;
+      --accent-light: #6366F1;
+      --glow: #A5B4FC;
+      --text-light: #111827;
+      --text-dark: #FFFFFF;
+      --glass-light: rgba(255, 255, 255, .12);
+      --glass-dark: rgba(30, 30, 30, .12);
+    }
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background .3s ease, color .3s ease;
+      overflow-x: hidden;
+    }
+    body.dark {background: var(--bg-dark); color: var(--text-dark);}
+
+    /* Glass card */
+    .glass {
+      background: var(--glass-light);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 24px;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    body.dark .glass {background: var(--glass-dark); border-color: rgba(255, 255, 255, .1);}
+    .glass:hover {transform: translateY(-4px) scale(1.02); box-shadow: 0 8px 32px rgba(0, 0, 0, .15);}
+
+    /* Buttons */
+    .btn {
+      @apply inline-flex items-center gap-2 font-medium rounded-xl px-6 py-3 transition-all;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(79, 70, 229, .4);
+    }
+    .btn-primary:hover {box-shadow: 0 10px 34px rgba(79, 70, 229, .6); transform: translateY(-2px);}
+
+    /* Hero utilities */
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(60% 60% at 50% 20%, var(--accent-light) 0%, transparent 100%);
+      opacity: .2;
+      pointer-events: none;
+    }
+
+    /* Card flip */
+    .card {perspective: 1000px; height: 280px;}
+    .card-inner {
+      position: relative; width: 100%; height: 100%;
+      transform-style: preserve-3d; transition: transform .8s cubic-bezier(.4,.2,.2,1);
+    }
+    .card:hover .card-inner {transform: rotateY(10deg) scale(1.03);}
+    .card.flipped .card-inner {transform: rotateY(180deg);}
+    .card-face {
+      position: absolute; inset: 0;
+      padding: 2.5rem; display: flex; flex-direction: column; justify-content: center;
+      backface-visibility: hidden;
+    }
+    .card-back {transform: rotateY(180deg);}
+
+    /* Particles */
+    .particle {position: absolute; width: 4px; height: 4px; background: var(--accent); border-radius: 50%; opacity: .6; animation: float 6s ease-in-out infinite;}
+    @keyframes float {0%,100%{transform:translateY(0) rotate(0);opacity:.6;} 50%{transform:translateY(-20px) rotate(180deg);opacity:1;}}
+
+    /* Team grid */
+    .team-grid {display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 40px; margin-top: 40px;}
+    .team-card {display: flex; flex-direction: column; align-items: center; text-align: center; padding: 2rem;}
+    .avatar {width: 64px; height: 64px; font-weight: 600; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 1rem; background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: #fff;}
+
+    /* Footer */
+    footer {padding: 4rem 1.25rem; text-align: center; border-top: 1px solid rgba(0,0,0,.06);}   
+    body.dark footer {border-top-color: rgba(255,255,255,.1);}  
+  </style>
+</head>
+<body>
+  <!-- THEME TOGGLE -->
+  <button class="theme-toggle fixed top-5 right-5 btn glass" onclick="toggleTheme()"><i data-lucide="sun-moon"></i></button>
+
+    <!-- HERO -->
+  <section id="hero" class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24">
+    <span class="hero-gradient"></span>
+    <!-- Logo -->
+    <img src="Quantegies logo.png" alt="Quantegies" class="mx-auto w-80 md:w-90 object-contain mb-6"/>
+
+   <h1 class="text-5xl md:text-7xl font-extrabold max-w-5xl leading-snug pb-4">
+  Transforming data into  
+  <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">
+    Decision-Making
+  </span> 
+  trades through AI.
+</h1>
+    </h1>
+    <p class="mt-6 text-lg md:text-xl max-w-xl opacity-80">
+      Backed by <strong>$650 K</strong> pre‑seed • Valued at <strong>$2.5 M</strong> • Powered by <strong>7 engineers</strong>
+    </p>
+   
+    <!-- Stats -->
+    <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-md mx-auto text-sm">
+      <div class="glass p-4"><span class="block text-xl font-semibold">1 ms</span><span class="opacity-70">median fill latency</span></div>
+      <div class="glass p-4"><span class="block text-xl font-semibold">24 sec</span><span class="opacity-70">full model cycle</span></div>
+      <div class="glass p-4"><span class="block text-xl font-semibold">4 M $</span><span class="opacity-70">avg. daily volume</span></div>
+      <div class="glass p-4"><span class="block text-xl font-semibold">99.99%</span><span class="opacity-70">infra uptime</span></div>
+    </div>
+  </section>
+
+  <!-- WHAT WE DO -->
+  <section id="what" class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-14">Precision-Trained Models. Live Execution. Institutional-Grade.</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      <!-- Card Template -->
+      <div class="card glass" onclick="this.classList.toggle('flipped')">
+        <div class="card-inner">
+          <div class="card-face">
+            <h3 class="text-xl font-semibold mb-4">Proprietary AI Model Training Engine</h3>
+            <p class="opacity-70">Click for details →</p>
+          </div>
+          <div class="card-face card-back text-sm leading-relaxed">
+            <ul class="list-disc ml-4 space-y-2">
+              <li>Q Library – Python/C++ micro‑structure toolkit</li>
+              <li>Tensor‑parallel clustering & GAT networks</li>
+              <li>Simulated limit‑order‑book environments</li>
+              <li>Plug‑in alpha modules & live RL fine‑tuning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="card glass" onclick="this.classList.toggle('flipped')">
+        <div class="card-inner">
+          <div class="card-face">
+            <h3 class="text-xl font-semibold mb-4">HFT Infrastructure</h3>
+            <p class="opacity-70">Click for details →</p>
+          </div>
+          <div class="card-face card-back text-sm leading-relaxed">
+            <p>Colocated in CME Aurora with kernel-bypass infrastructure, enabling sub‑200 µs order‑to‑ack latency and direct fiber to NY4.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="card glass" onclick="this.classList.toggle('flipped')">
+        <div class="card-inner">
+          <div class="card-face">
+            <h3 class="text-xl font-semibold mb-4">Full AI Model Lifecycle</h3>
+            <p class="opacity-70">Click for details →</p>
+          </div>
+          <div class="card-face card-back text-sm leading-relaxed">
+            <p>Data ingestion → feature store → training → simulation → staged rollout → live A/B → reinforcement learning loop.<br/>Entire pipeline completes in < 24 seconds end‑to‑end.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="max-w-4xl mx-auto text-center px-6 py-24">
+    <h2 class="text-3xl md:text-4xl font-bold mb-8">About Quantegies</h2>
+    <p class="text-lg leading-8 opacity-90">
+      Quantegies is a quantitative trading firm designing <em>AI‑native</em> high‑frequency strategies. Founded in 2024, our thesis is simple: the next decade of alpha will be captured by AI systems where ultra‑low‑latency execution meets continuously‑learning agents.
+    </p>
+    <ul class="mt-10 grid sm:grid-cols-2 gap-6 text-left text-base">
+      <li><strong>Daily volume:</strong> 4 M USD across equities & futures</li>
+      <li><strong>Tech stack:</strong> Rust, C++20, CUDA, PyTorch, kdb+/q, FPGA (Verilog)</li>
+      <li><strong>Reg footprint:</strong> SEC registrant(#Pending), CTA (#Pending)</li>
+      <li><strong>Security:</strong> SOC 2 (Type I) in progress • 24/7 on‑call SRE</li>
+    </ul>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap" class="max-w-7xl mx-auto px-6 py-24">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-14">Roadmap Tracks</h2>
+    <div class="grid lg:grid-cols-3 gap-10">
+      <div class="track glass p-8 text-white bg-gradient-to-br from-indigo-500 to-purple-500">
+        <h3 class="text-xl font-semibold mb-6">Technology</h3>
+        <ol class="space-y-3 list-decimal ml-4 text-sm">
+          <li>April — FPGA feed handlers v1</li>
+          <li>May — Kernel‑bypass network stack</li>
+          <li>June — RL optimizer for execution</li>
+          <li>Aug — Sub‑ms real‑time feature store</li>
+        </ol>
+      </div>
+      <div class="track glass p-8 text-white bg-gradient-to-br from-emerald-500 to-teal-500">
+        <h3 class="text-xl font-semibold mb-6">Markets</h3>
+        <ol class="space-y-3 list-decimal ml-4 text-sm">
+          <li>May — US Equities (NYSE/NASDAQ)</li>
+          <li>July — CME Futures (ES, NQ)</li>
+          <li>Sep — Eurex Futures (ESTOXX, DAX)</li>
+          <li>Q4 — Crypto (CME BTC, ETH)</li>
+        </ol>
+      </div>
+      <div class="track glass p-8 text-white bg-gradient-to-br from-rose-500 to-pink-500">
+        <h3 class="text-xl font-semibold mb-6">Business</h3>
+        <ol class="space-y-3 list-decimal ml-4 text-sm">
+          <li>April — $250 K pre‑seed closed</li>
+          <li>April — Seed round closed (target $2.5 M)</li>
+          <li>Q1 2025 — Reg A+ filing</li>
+          <li>Q2 2026 — Launch Q Founders batch #2</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Q FOUNDERS -->
+  <section class="relative mx-6 rounded-[3rem] overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 opacity-30 blur-3xl"></div>
+    <div class="relative px-10 py-24 text-center text-white">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Q Founders</h2>
+      <p class="text-lg opacity-90 mb-14">An accelerator empowering high‑school grads to become the next Q.</p>
+      <div class="grid sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+        <div class="glass p-6">
+          <h3 class="text-xl font-semibold mb-2">$10 K Funding</h3>
+          <p>Direct investment per founder</p>
+        </div>
+        <div class="glass p-6">
+          <h3 class="text-xl font-semibold mb-2">Mentorship</h3>
+          <p>Guidance from industry experts</p>
+        </div>
+        <div class="glass p-6">
+          <h3 class="text-xl font-semibold mb-2">Product Built</h3>
+          <p>Full‑stack team for 12 weeks</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="max-w-6xl mx-auto px-6 py-24">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-14">Meet the Team</h2>
+    <div class="team-grid">
+      <!-- Repeatable team-card template -->
+      <div class="team-card glass">
+        <div class="avatar">SI</div>
+        <h3 class="font-semibold">Saif Ismail</h3>
+        <p class="opacity-70 text-sm">Chief Executive Officer</p>
+      </div>
+      <div class="team-card glass"><div class="avatar">JS</div><h3 class="font-semibold">Jonathan Stephens</h3><p class="opacity-70 text-sm">Chief Technology Officer</p></div>
+      <div class="team-card glass"><div class="avatar">VD</div><h3 class="font-semibold">Vedant D.</h3><p class="opacity-70 text-sm">Backend Engineer</p></div>
+      <div class="team-card glass"><div class="avatar">TA</div><h3 class="font-semibold">Tanishq A.</h3><p class="opacity-70 text-sm">Backend Engineer</p></div>
+      <div class="team-card glass"><div class="avatar">YW</div><h3 class="font-semibold">Yash W.</h3><p class="opacity-70 text-sm">Full‑Stack Engineer</p></div>
+      <div class="team-card glass"><div class="avatar">EK</div><h3 class="font-semibold">Eram K.</h3><p class="opacity-70 text-sm">Front‑End Engineer</p></div>
+      <div class="team-card glass"><div class="avatar">YA</div><h3 class="font-semibold">Yash A.</h3><p class="opacity-70 text-sm">Full‑Stack Engineer</p></div>
+      <div class="team-card glass"><div class="avatar">KB</div><h3 class="font-semibold">Kavi B.</h3><p class="opacity-70 text-sm">AI Engineer</p></div>
+    </div>
+    <div class="text-center mt-16">
+      <a href="mailto:jobs@quantegies.com" class="btn btn-primary">Join Our Team <i data-lucide="arrow-right"></i></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="text-sm opacity-80">© 2025 Quantegies – Engineering the next decade of finance.</p>
+    <div class="flex gap-6 justify-center mt-4 text-sm">
+      <a href="mailto:investing@quantegies.com" class="hover:underline">investing@quantegies.com</a>
+      <a href="mailto:jobs@quantegies.com" class="hover:underline">jobs@quantegies.com</a>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Icons
+    lucide.createIcons();
+
+    // Theme handling
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    }
+    if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+
+    // Flip on key focus accessibility
+    document.querySelectorAll('.card').forEach(card => {
+      card.setAttribute('tabindex', '0');
+      card.addEventListener('keypress', e => {if (e.key === 'Enter') card.classList.toggle('flipped');});
+    });
+
+    // Particles
+    const particleContainer = document.createElement('div');
+    particleContainer.className = 'absolute inset-0 -z-10';
+    document.getElementById('hero').appendChild(particleContainer);
+    Array.from({length: 50}).forEach(() => {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random()*100 + '%';
+      p.style.top = Math.random()*100 + '%';
+      p.style.animationDelay = Math.random()*6 + 's';
+      p.style.animationDuration = 3 + Math.random()*3 + 's';
+      particleContainer.appendChild(p);
+    });
+  </script>
+</body>
+</html>
