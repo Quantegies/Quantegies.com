@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantegies | AI Research For Finance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            dark: '#111111',
+                            gray: '#666666',
+                            light: '#f5f5f7'
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth scrolling & Selection */
+        html { scroll-behavior: smooth; }
+        ::selection { background: #000; color: #fff; }
+        
+        /* Apple/Notion style backdrop blur */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Cursor for typewriter */
+        .cursor-blink {
+            display: inline-block;
+            width: 8px;
+            height: 18px;
+            background-color: #000;
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* Subtle grid background for tech sections */
+        .tech-grid-bg {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+        }
+        
+        /* Typography utilities */
+        .text-balance { text-wrap: balance; }
+    </style>
+</head>
+<body class="bg-white text-brand-black antialiased selection:bg-black selection:text-white">
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-2">
+            <img 
+                src="quantegies-logo.png" 
+                alt="Quantegies Logo" 
+                class="h-7 w-auto"
+            >
+        </a>
+        
+        <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-500">
+            <a href="#manifesto" class="hover:text-black transition-colors">Our Why</a>
+            <a href="#capabilities" class="hover:text-black transition-colors">Capabilities</a>
+            <a href="#careers" class="hover:text-black transition-colors">Careers</a>
+        </div>
+
+        <a href="mailto:jobs@quantegies.com" class="text-sm font-medium bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition-all transform hover:-translate-y-0.5 shadow-sm">
+            Contact
+        </a>
+    </div>
+</nav>
+
+
+    <!-- Hero Section (Preserved) -->
+    <section class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <!-- Interactive Background Canvas -->
+        <canvas id="heroCanvas" class="absolute inset-0 w-full h-full z-0 opacity-60"></canvas>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white z-0 pointer-events-none"></div>
+        
+        <!-- Content -->
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center">
+            
+            <!-- Funding / Trust Badge -->
+            <div class="opacity-0 animate-fade-in-up" style="animation-delay: 0.1s;">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50 border border-gray-200/80 text-[11px] uppercase tracking-wider font-semibold text-gray-600 mb-8 shadow-sm cursor-default hover:bg-gray-100 transition-colors">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    Valuation Cap: $6.5m
+                </div>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="opacity-0 animate-fade-in-up text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter leading-[1.1] mb-8" style="animation-delay: 0.2s;">
+                AI <br>
+                <span class="text-gray-400">For Finance.</span>
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="opacity-0 animate-fade-in-up text-lg md:text-xl text-gray-500 max-w-2xl leading-relaxed mb-10 text-balance" style="animation-delay: 0.3s;">
+                Quantegies is an AI research lab deploying next-generation quantitative strategies into global markets. We bridge the gap between deep learning and alpha generation.
+            </p>
+
+            <!-- Hiring Animation (Typewriter) -->
+            <div class="opacity-0 animate-fade-in-up mb-12 h-8 flex items-center" style="animation-delay: 0.4s;">
+                <span class="font-mono text-sm md:text-base text-black font-medium bg-gray-100 px-3 py-1 rounded-md border border-gray-200 shadow-sm">
+                    > <span id="typewriter-text"></span><span class="cursor-blink"></span>
+                </span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="opacity-0 animate-fade-in-up flex flex-col sm:flex-row gap-4" style="animation-delay: 0.5s;">
+                <a href="#careers" class="px-8 py-3.5 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 group">
+                    View Open Roles
+                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+                <a href="#manifesto" class="px-8 py-3.5 bg-white text-black border border-gray-200 rounded-lg font-medium hover:bg-gray-50 transition-all hover:border-gray-300">
+                    Our Why
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-gray-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </section>
+
+    <!-- Manifesto Section (Deep Detail) -->
+    <section id="manifesto" class="py-32 px-6 border-t border-gray-100">
+        <div class="max-w-3xl mx-auto">
+            <div class="space-y-16">
+                <!-- Thesis Block -->
+                <div>
+                    <h4 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">The Third Paradigm</h4>
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-8 leading-tight">
+                        Markets are not random walks. <br>
+                        They are high-dimensional physics problems.
+                    </h2>
+                    <div class="prose prose-lg text-gray-600 leading-relaxed space-y-6">
+                        <p>
+                            For decades, quantitative finance has been dominated by "Quant 1.0": linear regressions, statistical arbitrage, and mean reversion. These methods assume markets are stationary and noise is normally distributed. In a hyper-connected world, these assumptions are collapsing.
+                        </p>
+                        <p>
+                            We believe we are entering the "AI Native" era of finance. Just as LLMs learned the underlying structure of language, our Foundation Models for Finance (FMFs) are learning the latent physics of price action.
+                        </p>
+                        <p>
+                            By treating the entire market history not as a spreadsheet, but as a sequential language problem, we can identify non-linear causal chains that are invisible to traditional statistical methods.
+                        </p>
+                    </div>
+                </div>
+
+                <hr class="border-gray-100">
+
+                <!-- Evolution Graph (CSS Art) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+                        <div class="h-2 w-full bg-gray-200 rounded mb-4 overflow-hidden">
+                            <div class="h-full bg-gray-400 w-full"></div>
+                        </div>
+                        <h3 class="font-bold text-black">Fundamental</h3>
+                        <p class="text-sm text-gray-500 mt-2">Human intuition. High latency. Unscalable.</p>
+                    </div>
+                    <div class="opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                        <div class="h-2 w-full bg-gray-200 rounded mb-4 overflow-hidden">
+                            <div class="h-full bg-gray-600 w-3/4"></div>
+                        </div>
+                        <h3 class="font-bold text-black">Statistical (Quant 1.0)</h3>
+                        <p class="text-sm text-gray-500 mt-2">Linear models. Feature engineering. Crowded trades.</p>
+                    </div>
+                    <div class="">
+                        <div class="h-2 w-full bg-gray-200 rounded mb-4 overflow-hidden">
+                            <div class="h-full bg-black w-1/5 animate-pulse"></div>
+                        </div>
+                        <h3 class="font-bold text-black">Generative (Quantegies)</h3>
+                        <p class="text-sm text-gray-500 mt-2">End-to-end Deep Learning. Emergent strategies. Adaptive.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capabilities (Detailed Tech) -->
+    <section id="capabilities" class="py-32 px-6 bg-brand-black text-white relative overflow-hidden">
+        <!-- Subtle grid on dark bg -->
+        <div class="absolute inset-0 opacity-10 tech-grid-bg pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="mb-20 border-l-2 border-white/20 pl-8">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">Beyond Statistical Arbitrage</h2>
+                <p class="text-xl text-gray-400 max-w-2xl">
+                    We don't just fit curves. We build agents that understand market microstructure.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+                
+                <!-- Capability 1 -->
+                <div class="group">
+                    <div class="h-px w-full bg-white/20 mb-6 group-hover:bg-white transition-colors duration-500"></div>
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        Temporal Transformers
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        Adapting the "Attention Mechanism" from NLP to financial time-series. Unlike RNNs, our Transformer architecture can attend to distant historical events (e.g., 2008 crisis patterns) to contextualize current volatility in real-time, regardless of the time lag.
+                    </p>
+                </div>
+
+                <!-- Capability 2 -->
+                <div class="group">
+                    <div class="h-px w-full bg-white/20 mb-6 group-hover:bg-white transition-colors duration-500"></div>
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                        Counterfactual Simulation
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        Data is sparse. History only happened once. We use Generative Adversarial Networks (GANs) to generate infinite "synthetic futures"—stress-testing our agents against billions of simulated market crashes and melt-ups before they deploy a single dollar.
+                    </p>
+                </div>
+
+                <!-- Capability 3 -->
+                <div class="group">
+                    <div class="h-px w-full bg-white/20 mb-6 group-hover:bg-white transition-colors duration-500"></div>
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+                        Neural Execution
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        Alpha is worthless if you can't capture it. Our execution algorithms are Deep RL agents rewarded for minimizing market impact. They learn to hide order flow in the noise, deciphering the intentions of other HFT algorithms in the order book.
+                    </p>
+                </div>
+
+                <!-- Capability 4 -->
+                <div class="group">
+                    <div class="h-px w-full bg-white/20 mb-6 group-hover:bg-white transition-colors duration-500"></div>
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                        Multi-Modal Ingestion
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        Price is a lagging indicator. We ingest petabytes of alternative data: satellite imagery of parking lots, credit card transaction receipts, and real-time semantic analysis of central bank speeches to predict price moves before they appear on the ticker.
+                    </p>
+                </div>
+
+                 <!-- Capability 5 -->
+                 <div class="group">
+                    <div class="h-px w-full bg-white/20 mb-6 group-hover:bg-white transition-colors duration-500"></div>
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+                        Self-Optimizing Infrastructure
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        A compute layer that scales elastically. Our Kubernetes clusters dynamically reallocate GPUs between training (research) and inference (trading) based on market volatility regimes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section id="careers" class="py-32 px-6 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-16 text-center md:text-left">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-brand-black">Join the Lab</h2>
+                <p class="text-gray-600 text-lg">We are a small team of researchers and engineers solving the hardest problems in finance. We are currently hiring for the following roles.</p>
+            </div>
+
+            <div class="grid gap-6">
+                <!-- Role 1 -->
+                <div class="group">
+                    <a href="mailto:jobs@quantegies.com?subject=Application: Quant Researcher" class="block p-8 bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg hover:border-black transition-all duration-300 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="flex justify-between items-start md:items-center flex-col md:flex-row gap-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-black mb-2">Quant Researcher</h3>
+                                <div class="flex gap-3 text-sm text-gray-500 font-medium font-mono">
+                                    <span class="bg-gray-100 px-2 py-1 rounded">Python/C++</span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded">Remote</span>
+                                </div>
+                            </div>
+                            <span class="hidden md:inline-block px-6 py-2 rounded-full bg-black text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
+                                Apply via Email &rarr;
+                            </span>
+                        </div>
+                        <p class="mt-6 text-gray-600 leading-relaxed text-sm md:text-base">
+                            You will focus on feature engineering and alpha generation. Requires deep knowledge of probability theory, stochastic calculus, and experience with petabyte-scale datasets.
+                        </p>
+                    </a>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="group">
+                    <a href="mailto:jobs@quantegies.com?subject=Application: AI Researcher" class="block p-8 bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg hover:border-black transition-all duration-300 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="flex justify-between items-start md:items-center flex-col md:flex-row gap-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-black mb-2">AI Researcher</h3>
+                                <div class="flex gap-3 text-sm text-gray-500 font-medium font-mono">
+                                    <span class="bg-gray-100 px-2 py-1 rounded">PyTorch/JAX</span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded">Remote</span>
+                                </div>
+                            </div>
+                            <span class="hidden md:inline-block px-6 py-2 rounded-full bg-black text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
+                                Apply via Email &rarr;
+                            </span>
+                        </div>
+                        <p class="mt-6 text-gray-600 leading-relaxed text-sm md:text-base">
+                            You will design novel architectures for time-series forecasting. We are looking for expertise in Transformers, Diffusion Models, and Reinforcement Learning (PPO/SAC).
+                        </p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center border-t border-gray-200 pt-8">
+                <p class="text-gray-500">Don't fit these exact roles? <a href="mailto:jobs@quantegies.com" class="text-black font-medium underline underline-offset-4 hover:text-gray-600">Email us</a> your CV anyway.</p>
+            </div>
+        </div>
+    </section>
+
+  <!-- Minimal Footer -->
+<footer class="bg-white border-t border-gray-200 py-12 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-2">
+            <img 
+                src="quantegies-logo.png" 
+                alt="Quantegies Logo" 
+                class="h-5 w-auto"
+            >
+        </div>
+
+        <div class="text-sm text-gray-400 font-medium">
+            © 2025 Quantegies.
+        </div>
+
+    </div>
+</footer>
+
+
+    <script>
+        // --- Typewriter Logic (Preserved) ---
+        const textElement = document.getElementById('typewriter-text');
+        const phrases = [
+            "We are hiring Quant Researchers.",
+            "We are hiring AI Researchers.",
+            "Deploying models to production.",
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 50;
+
+        function typeWriter() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 30; 
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 60; 
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typeSpeed = 2500; 
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500; 
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+
+        document.addEventListener('DOMContentLoaded', typeWriter);
+
+        // --- Interactive Background Logic (Preserved) ---
+        const canvas = document.getElementById('heroCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        
+        const PARTICLE_COUNT = 50; // Increased slightly for better density
+        const CONNECTION_DISTANCE = 180;
+        const MOUSE_DISTANCE = 250;
+
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+        
+        window.addEventListener('resize', resize);
+
+        function resize() {
+            width = canvas.width = canvas.offsetWidth;
+            height = canvas.height = canvas.offsetHeight;
+            initParticles();
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.4; // Slower, more elegant speed
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.size = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < MOUSE_DISTANCE) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (MOUSE_DISTANCE - distance) / MOUSE_DISTANCE;
+                        const directionMultiplier = -0.6; 
+                        
+                        this.vx += forceDirectionX * force * directionMultiplier * 0.05;
+                        this.vy += forceDirectionY * force * directionMultiplier * 0.05;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = '#e0e0e0'; 
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let dx = particles[a].x - particles[b].x;
+                    let dy = particles[a].y - particles[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < CONNECTION_DISTANCE) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(200, 200, 200, ${1 - distance/CONNECTION_DISTANCE})`; 
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        resize();
+        animate();
+
+    </script>
+</body>
+</html>
+
+
