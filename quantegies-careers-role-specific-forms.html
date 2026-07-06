@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore open roles at Quantegies, an AI research lab building quantitative systems for global markets." />
+  <title>Careers at Quantegies</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              black: '#050505',
+              dark: '#111111',
+              gray: '#666666',
+              light: '#f5f5f7'
+            }
+          },
+          boxShadow: {
+            soft: '0 16px 45px rgba(0, 0, 0, 0.07)',
+            lift: '0 25px 65px rgba(0, 0, 0, 0.11)'
+          },
+          animation: {
+            'fade-in-up': 'fadeInUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'pulse-soft': 'pulseSoft 3s ease-in-out infinite'
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(22px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            pulseSoft: {
+              '0%, 100%': { opacity: '.45' },
+              '50%': { opacity: '1' }
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { overflow-x: hidden; }
+    ::selection { background: #050505; color: #fff; }
+
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .tech-grid-bg {
+      background-size: 42px 42px;
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.035) 1px, transparent 1px);
+    }
+
+    .dark-grid-bg {
+      background-size: 48px 48px;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
+    }
+
+    .text-balance { text-wrap: balance; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .job-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .35s ease;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0,0,0,.045), transparent 42%);
+    }
+
+    .job-card:hover::before { opacity: 1; }
+
+
+    .modal-scroll::-webkit-scrollbar { width: 8px; }
+    .modal-scroll::-webkit-scrollbar-track { background: transparent; }
+    .modal-scroll::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 999px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-white text-brand-black antialiased">
+  <!-- Navigation -->
+  <nav class="fixed inset-x-0 top-0 z-50 glass-nav">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2" aria-label="Quantegies home">
+        <img src="Quantegies-logo.png" alt="Quantegies" class="h-14 w-auto" />
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-500">
+        <a href="#open-roles" class="hover:text-black transition-colors">Open Roles</a>
+        <a href="#why-quantegies" class="hover:text-black transition-colors">Why Quantegies</a>
+        <a href="#process" class="hover:text-black transition-colors">Hiring Process</a>
+        <a href="#faq" class="hover:text-black transition-colors">FAQ</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="hidden sm:inline-flex text-sm font-medium text-gray-500 hover:text-black transition-colors">
+          Back to Quantegies
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="relative min-h-[92vh] flex items-center overflow-hidden pt-24 pb-16 tech-grid-bg">
+      <canvas id="careerCanvas" class="absolute inset-0 w-full h-full opacity-55" aria-hidden="true"></canvas>
+      <div class="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div class="grid lg:grid-cols-[1.15fr_.85fr] gap-14 lg:gap-20 items-center">
+          <div>
+            <div class="opacity-0 animate-fade-in-up inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-200 bg-white/80 shadow-sm text-[11px] uppercase tracking-[0.16em] font-semibold text-gray-600" style="animation-delay:.08s">
+              <span class="relative flex h-2 w-2">
+                <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-70 animate-ping"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              Building the next generation of generating Alpha
+            </div>
+
+            <h1 class="opacity-0 animate-fade-in-up mt-8 text-5xl sm:text-6xl lg:text-[82px] leading-[.98] tracking-[-0.055em] font-semibold text-balance" style="animation-delay:.16s">
+              Do the work<br>
+              <span class="text-gray-400">markets remember.</span>
+            </h1>
+
+            <p class="opacity-0 animate-fade-in-up mt-8 text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl text-balance" style="animation-delay:.24s">
+              Join a small, ambitious team building quantitative research, execution systems, and Financial products used to understand and operate in global markets.
+            </p>
+
+            <div class="opacity-0 animate-fade-in-up mt-10 flex flex-col sm:flex-row gap-3" style="animation-delay:.32s">
+              <a href="#open-roles" class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-black text-white font-medium hover:bg-gray-800 hover:-translate-y-0.5 transition-all shadow-lg group">
+                View open positions
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <a href="#" data-application-form class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-white border border-gray-200 font-medium hover:border-gray-400 hover:bg-gray-50 transition-all">
+                Send an open application
+              </a>
+            </div>
+          </div>
+
+          <!-- Research team visual -->
+          <div class="opacity-0 animate-fade-in-up relative lg:pl-2" style="animation-delay:.34s">
+            <div class="absolute -inset-5 rounded-[2.5rem] bg-gradient-to-br from-gray-200/60 via-white to-gray-100 blur-2xl pointer-events-none"></div>
+
+            <div class="group relative overflow-hidden rounded-[2rem] border border-gray-200 bg-white shadow-[0_28px_90px_-35px_rgba(0,0,0,.32)]">
+              <div class="relative min-h-[520px] sm:min-h-[570px] overflow-hidden">
+                <img
+                  src="quantegies-careers-office.png"
+                  alt="Quantitative researchers collaborating on market models and mathematical research"
+                  class="absolute inset-0 h-full w-full object-cover object-[69%_center] transition-transform duration-[1200ms] ease-out group-hover:scale-[1.025]"
+                  loading="eager"
+                  decoding="async"
+                />
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/12 to-black/5"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-black/15 via-transparent to-transparent"></div>
+
+                <div class="absolute left-5 right-5 top-5 sm:left-7 sm:right-7 sm:top-7 flex items-start justify-between gap-4">
+                  <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/25 px-3.5 py-2 text-white shadow-sm backdrop-blur-md">
+                    <span class="relative flex h-2 w-2">
+                      <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping"></span>
+                      <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+                    </span>
+                    <span class="font-mono text-[10px] font-medium uppercase tracking-[.18em] text-white/90">Research in progress</span>
+                  </div>
+
+                  <div class="hidden sm:flex rounded-full border border-white/15 bg-black/20 px-3 py-2 font-mono text-[9px] uppercase tracking-[.18em] text-white/60 backdrop-blur-md">
+                    Quantegies / Careers
+                  </div>
+                </div>
+
+                <div class="absolute inset-x-0 bottom-0 p-6 sm:p-8 lg:p-10">
+                  <div class="max-w-xl">
+                    <p class="font-mono text-[10px] font-medium uppercase tracking-[.22em] text-white/50">Research, engineering, and markets</p>
+                    <h2 class="mt-3 text-2xl sm:text-3xl font-semibold leading-tight tracking-[-.025em] text-white">
+                      Work beside people who turn difficult ideas into Alpha.
+                    </h2>
+                    <p class="mt-4 max-w-lg text-sm sm:text-[15px] leading-relaxed text-white/65">
+                      Collaborate directly across quantitative research, machine learning, execution, and product engineers, without layers separating the idea from the outcome.
+                    </p>
+                  </div>
+
+                  <div class="mt-8 grid grid-cols-3 gap-3 border-t border-white/15 pt-6">
+                    <div>
+                      <p class="font-mono text-[9px] uppercase tracking-[.16em] text-white/35">Structure</p>
+                      <p class="mt-1.5 text-xs sm:text-sm font-medium text-white">Small teams</p>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[9px] uppercase tracking-[.16em] text-white/35">Standard</p>
+                      <p class="mt-1.5 text-xs sm:text-sm font-medium text-white">Research rigor</p>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[9px] uppercase tracking-[.16em] text-white/35">Outcome</p>
+                      <p class="mt-1.5 text-xs sm:text-sm font-medium text-white">Live impact</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="absolute -bottom-5 left-6 right-6 sm:left-auto sm:right-7 sm:w-[285px] rounded-2xl border border-gray-200 bg-white/95 p-4 shadow-xl backdrop-blur-xl">
+              <div class="flex items-center gap-3">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-black text-white">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 18.5 9.5 13l3.5 3.5L20 8.5M15 8.5h5v5" />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <p class="font-mono text-[9px] uppercase tracking-[.16em] text-gray-400">Current mandate</p>
+                  <p class="mt-1 truncate text-sm font-semibold text-black">Expand the research organization</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Open roles -->
+    <section id="open-roles" class="py-28 px-6 border-t border-gray-100">
+      <div class="max-w-7xl mx-auto">
+        <div class="reveal flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[.2em] text-gray-400">Open positions</p>
+            <h2 class="mt-4 text-4xl sm:text-5xl font-semibold tracking-[-.04em]">Find your place in the lab.</h2>
+            <p class="mt-5 max-w-2xl text-lg text-gray-600 leading-relaxed">
+              Every role is close to the work. You will collaborate directly with researchers, engineers, product leaders, and traders.
+            </p>
+          </div>
+        </div>
+
+        <div class="reveal sticky top-20 z-30 bg-white/90 backdrop-blur-xl border border-gray-200 rounded-2xl p-3 sm:p-4 shadow-soft mb-8">
+          <div class="grid md:grid-cols-[1fr_190px_190px_auto] gap-3">
+            <label class="relative block">
+              <span class="sr-only">Search roles</span>
+              <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.35-4.35m1.35-5.15A6.5 6.5 0 1 1 5 11.5a6.5 6.5 0 0 1 13 0Z" />
+              </svg>
+              <input id="searchInput" type="search" placeholder="Search title, skill, or product" class="w-full h-12 pl-11 pr-4 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-black outline-none transition text-sm" />
+            </label>
+
+            <label>
+              <span class="sr-only">Filter by team</span>
+              <select id="teamFilter" class="w-full h-12 px-4 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-black outline-none transition text-sm cursor-pointer">
+                <option value="all">All teams</option>
+              </select>
+            </label>
+
+            <label>
+              <span class="sr-only">Filter by location</span>
+              <select id="locationFilter" class="w-full h-12 px-4 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-black outline-none transition text-sm cursor-pointer">
+                <option value="all">All locations</option>
+              </select>
+            </label>
+
+            <button id="clearFilters" type="button" class="h-12 px-5 rounded-xl border border-gray-200 text-sm font-medium hover:border-black hover:bg-gray-50 transition whitespace-nowrap">
+              Clear filters
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-5 flex items-center justify-between gap-4">
+          <p id="resultCount" class="font-mono text-xs uppercase tracking-[.16em] text-gray-400"></p>
+          <div class="hidden sm:flex items-center gap-2 text-xs text-gray-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            Applications reviewed on a rolling basis
+          </div>
+        </div>
+
+        <div id="jobsGrid" class="grid gap-4"></div>
+
+        <div id="emptyState" class="hidden py-20 text-center border border-dashed border-gray-300 rounded-2xl bg-gray-50">
+          <div class="mx-auto w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center">
+            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="m21 21-4.35-4.35m1.35-5.15A6.5 6.5 0 1 1 5 11.5a6.5 6.5 0 0 1 13 0Z" />
+            </svg>
+          </div>
+          <h3 class="mt-5 text-xl font-semibold">No matching roles</h3>
+          <p class="mt-2 text-gray-500">Try a different team, location, or search term.</p>
+          <button type="button" onclick="resetFilters()" class="mt-6 px-5 py-2.5 rounded-lg bg-black text-white text-sm font-medium hover:bg-gray-800 transition">Reset filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Quantegies -->
+    <section id="why-quantegies" class="py-28 px-6 bg-brand-black text-white relative overflow-hidden">
+      <div class="absolute inset-0 dark-grid-bg opacity-60"></div>
+      <div class="absolute -top-32 right-0 w-[520px] h-[520px] rounded-full bg-white/[.035] blur-3xl"></div>
+
+      <div class="max-w-7xl mx-auto relative z-10">
+        <div class="reveal max-w-3xl">
+          <p class="font-mono text-xs uppercase tracking-[.2em] text-white/35">Why Quantegies</p>
+          <h2 class="mt-4 text-4xl sm:text-5xl font-semibold tracking-[-.04em] text-balance">A research environment without the distance from production.</h2>
+          <p class="mt-6 text-lg text-white/55 leading-relaxed max-w-2xl">
+            We combine the rigor of a research lab with the accountability of live systems. Ideas are expected to become measurable, testable, and useful.
+          </p>
+        </div>
+
+        <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-4 border-y border-white/10 divide-y md:divide-y-0 md:divide-x divide-white/10">
+          <article class="reveal py-8 md:px-7 first:pl-0">
+            <span class="font-mono text-xs text-white/30">01 / OWNERSHIP</span>
+            <h3 class="mt-5 text-xl font-semibold">Own the whole outcome.</h3>
+            <p class="mt-3 text-sm leading-relaxed text-white/50">Move from problem framing through implementation, validation, and deployment instead of handing work across layers.</p>
+          </article>
+          <article class="reveal py-8 md:px-7">
+            <span class="font-mono text-xs text-white/30">02 / LEARNING</span>
+            <h3 class="mt-5 text-xl font-semibold">Work near difficult problems.</h3>
+            <p class="mt-3 text-sm leading-relaxed text-white/50">Market microstructure, temporal modeling, execution, simulation, and product engineering meet in the same environment.</p>
+          </article>
+          <article class="reveal py-8 md:px-7">
+            <span class="font-mono text-xs text-white/30">03 / VELOCITY</span>
+            <h3 class="mt-5 text-xl font-semibold">Ship with judgment.</h3>
+            <p class="mt-3 text-sm leading-relaxed text-white/50">We value fast iteration, but not careless iteration. Good speed comes from clarity, instrumentation, and strong technical taste.</p>
+          </article>
+          <article class="reveal py-8 md:pl-7 md:pr-0">
+            <span class="font-mono text-xs text-white/30">04 / IMPACT</span>
+            <h3 class="mt-5 text-xl font-semibold">See your work used.</h3>
+            <p class="mt-3 text-sm leading-relaxed text-white/50">Contributions reach internal traders, research workflows, BAQLABS, Atlas Charts, SYNQ, and live operating systems.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How we work -->
+    <section class="py-28 px-6 bg-gray-50 border-b border-gray-200">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-[.8fr_1.2fr] gap-14 lg:gap-24 items-start">
+          <div class="reveal lg:sticky lg:top-28">
+            <p class="font-mono text-xs uppercase tracking-[.2em] text-gray-400">How we work</p>
+            <h2 class="mt-4 text-4xl sm:text-5xl font-semibold tracking-[-.04em]">Small teams.<br>Clear standards.</h2>
+            <p class="mt-6 text-gray-600 leading-relaxed">
+              We are structured around direct collaboration, documented decisions, and measurable outcomes. Titles matter less than the ability to improve the quality of the work around you.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <article class="reveal bg-white border border-gray-200 rounded-2xl p-7 sm:p-8">
+              <div class="flex gap-5">
+                <span class="shrink-0 w-10 h-10 rounded-xl bg-black text-white flex items-center justify-center font-mono text-xs">01</span>
+                <div>
+                  <h3 class="text-xl font-semibold">Remote, but not disconnected</h3>
+                  <p class="mt-3 text-gray-600 leading-relaxed">We use written plans, clear owners, focused working sessions, and regular reviews so remote work remains fast and coordinated.</p>
+                </div>
+              </div>
+            </article>
+            <article class="reveal bg-white border border-gray-200 rounded-2xl p-7 sm:p-8">
+              <div class="flex gap-5">
+                <span class="shrink-0 w-10 h-10 rounded-xl bg-black text-white flex items-center justify-center font-mono text-xs">02</span>
+                <div>
+                  <h3 class="text-xl font-semibold">Research must survive contact with reality</h3>
+                  <p class="mt-3 text-gray-600 leading-relaxed">We care about out-of-sample behavior, execution constraints, latency, operational reliability, and the difference between a backtest and a deployable system.</p>
+                </div>
+              </div>
+            </article>
+            <article class="reveal bg-white border border-gray-200 rounded-2xl p-7 sm:p-8">
+              <div class="flex gap-5">
+                <span class="shrink-0 w-10 h-10 rounded-xl bg-black text-white flex items-center justify-center font-mono text-xs">03</span>
+                <div>
+                  <h3 class="text-xl font-semibold">Feedback is part of the operating system</h3>
+                  <p class="mt-3 text-gray-600 leading-relaxed">Work is reviewed directly and frequently. The goal is not ceremony; it is reducing ambiguity and improving decisions before small issues become expensive ones.</p>
+                </div>
+              </div>
+            </article>
+            <article class="reveal bg-white border border-gray-200 rounded-2xl p-7 sm:p-8">
+              <div class="flex gap-5">
+                <span class="shrink-0 w-10 h-10 rounded-xl bg-black text-white flex items-center justify-center font-mono text-xs">04</span>
+                <div>
+                  <h3 class="text-xl font-semibold">Compensation follows scope and impact</h3>
+                  <p class="mt-3 text-gray-600 leading-relaxed">Packages vary by role and geography and may include base compensation, performance-based incentives, or other long-term components depending on the position.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hiring process -->
+    <section id="process" class="py-28 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="reveal text-center max-w-3xl mx-auto">
+          <p class="font-mono text-xs uppercase tracking-[.2em] text-gray-400">Hiring process</p>
+          <h2 class="mt-4 text-4xl sm:text-5xl font-semibold tracking-[-.04em]">Rigorous, direct, and respectful.</h2>
+          <p class="mt-5 text-lg text-gray-600">The exact process varies by role, but every stage is designed to evaluate real judgment rather than rehearsed interview performance.</p>
+        </div>
+
+        <div class="mt-16 grid md:grid-cols-4 gap-4">
+          <article class="reveal relative rounded-2xl border border-gray-200 p-7 bg-white hover:shadow-soft transition-shadow">
+            <p class="font-mono text-xs text-gray-400">STEP 01</p>
+            <h3 class="mt-10 text-xl font-semibold">Application review</h3>
+            <p class="mt-3 text-sm text-gray-600 leading-relaxed">We review your work, experience, and evidence of ownership—not just titles or pedigree.</p>
+          </article>
+          <article class="reveal relative rounded-2xl border border-gray-200 p-7 bg-white hover:shadow-soft transition-shadow">
+            <p class="font-mono text-xs text-gray-400">STEP 02</p>
+            <h3 class="mt-10 text-xl font-semibold">Working conversation</h3>
+            <p class="mt-3 text-sm text-gray-600 leading-relaxed">A focused discussion about your decisions, trade-offs, technical depth, and the role’s actual mandate.</p>
+          </article>
+          <article class="reveal relative rounded-2xl border border-gray-200 p-7 bg-white hover:shadow-soft transition-shadow">
+            <p class="font-mono text-xs text-gray-400">STEP 03</p>
+            <h3 class="mt-10 text-xl font-semibold">Practical evaluation</h3>
+            <p class="mt-3 text-sm text-gray-600 leading-relaxed">A concise role-relevant exercise, case study, code review, research critique, or trading scenario.</p>
+          </article>
+          <article class="reveal relative rounded-2xl border border-gray-200 p-7 bg-white hover:shadow-soft transition-shadow">
+            <p class="font-mono text-xs text-gray-400">STEP 04</p>
+            <h3 class="mt-10 text-xl font-semibold">Final alignment</h3>
+            <p class="mt-3 text-sm text-gray-600 leading-relaxed">We align on scope, expectations, compensation, availability, and what success looks like in the first 90 days.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-28 px-6 bg-gray-50 border-y border-gray-200">
+      <div class="max-w-4xl mx-auto">
+        <div class="reveal text-center mb-14">
+          <p class="font-mono text-xs uppercase tracking-[.2em] text-gray-400">FAQ</p>
+          <h2 class="mt-4 text-4xl sm:text-5xl font-semibold tracking-[-.04em]">Before you apply.</h2>
+        </div>
+
+        <div class="space-y-3" id="faqList">
+          <details class="reveal group bg-white border border-gray-200 rounded-2xl overflow-hidden">
+            <summary class="cursor-pointer list-none p-6 sm:p-7 flex items-center justify-between gap-6 font-medium">
+              Are all positions remote?
+              <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <div class="px-6 sm:px-7 pb-7 text-gray-600 leading-relaxed">Most roles are remote, but some positions have preferred time-zone overlap or location requirements. The role card and full description state the primary location clearly.</div>
+          </details>
+          <details class="reveal group bg-white border border-gray-200 rounded-2xl overflow-hidden">
+            <summary class="cursor-pointer list-none p-6 sm:p-7 flex items-center justify-between gap-6 font-medium">
+              Do I need prior finance experience?
+              <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <div class="px-6 sm:px-7 pb-7 text-gray-600 leading-relaxed">Not for every role. For engineering and product positions, strong systems thinking and the ability to learn market concepts quickly may matter more. Quantitative research and trading roles generally require deeper market or statistical experience.</div>
+          </details>
+          <details class="reveal group bg-white border border-gray-200 rounded-2xl overflow-hidden">
+            <summary class="cursor-pointer list-none p-6 sm:p-7 flex items-center justify-between gap-6 font-medium">
+              Can early-career candidates apply?
+              <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <div class="px-6 sm:px-7 pb-7 text-gray-600 leading-relaxed">Yes. We consider high-potential candidates who can demonstrate learning velocity, technical fundamentals, thoughtful projects, and strong accountability—even when their formal experience is limited.</div>
+          </details>
+          <details class="reveal group bg-white border border-gray-200 rounded-2xl overflow-hidden">
+            <summary class="cursor-pointer list-none p-6 sm:p-7 flex items-center justify-between gap-6 font-medium">
+              What should I include with my application?
+              <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <div class="px-6 sm:px-7 pb-7 text-gray-600 leading-relaxed">Include a concise résumé or CV and links to relevant work. For research roles, papers, notebooks, or strategy write-ups are useful. For engineering roles, repositories, shipped products, architecture examples, or technical case studies are valuable.</div>
+          </details>
+          <details class="reveal group bg-white border border-gray-200 rounded-2xl overflow-hidden">
+            <summary class="cursor-pointer list-none p-6 sm:p-7 flex items-center justify-between gap-6 font-medium">
+              How are salary ranges determined?
+              <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <div class="px-6 sm:px-7 pb-7 text-gray-600 leading-relaxed">Ranges reflect the role’s scope and primary hiring market. Final compensation depends on experience, location, employment structure, and the level at which the candidate is hired.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-28 px-6">
+      <div class="reveal max-w-7xl mx-auto rounded-[2rem] bg-black text-white overflow-hidden relative">
+        <div class="absolute inset-0 dark-grid-bg opacity-60"></div>
+        <div class="absolute -right-28 -top-28 w-96 h-96 rounded-full border border-white/10"></div>
+        <div class="absolute -right-16 -top-16 w-72 h-72 rounded-full border border-white/10"></div>
+        <div class="relative z-10 p-8 sm:p-12 lg:p-16 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
+          <div class="max-w-3xl">
+            <p class="font-mono text-xs uppercase tracking-[.2em] text-white/35">No exact match?</p>
+            <h2 class="mt-4 text-4xl sm:text-5xl font-semibold tracking-[-.04em] text-balance">Exceptional people rarely fit perfectly into a job description.</h2>
+            <p class="mt-6 text-white/55 text-lg leading-relaxed">Send us your background, the work you are most proud of, and the problem you believe you could help us solve.</p>
+          </div>
+          <a href="#" data-application-form class="shrink-0 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white text-black font-medium hover:bg-gray-100 hover:-translate-y-0.5 transition-all">
+            Introduce yourself
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 3h7v7m0-7L10 14" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 14v7H3V3h7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-200 py-14 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <div>
+          <img src="Quantegies-logo.png" alt="Quantegies" class="h-14 w-auto" />
+          <p class="mt-3 text-sm text-gray-500 max-w-md">AI research, quantitative systems, and market infrastructure.</p>
+        </div>
+        <div class="flex flex-wrap gap-x-7 gap-y-3 text-sm text-gray-500">
+          <a href="index.html" class="hover:text-black transition">Home</a>
+          <a href="#open-roles" class="hover:text-black transition">Open Roles</a>
+          <a href="#process" class="hover:text-black transition">Hiring Process</a>
+          <a href="https://www.linkedin.com/company/Quantegies" target="_blank" rel="noopener" class="hover:text-black transition">LinkedIn</a>
+          <a href="mailto:jobs@quantegies.com" class="hover:text-black transition">jobs@quantegies.com</a>
+        </div>
+      </div>
+      <div class="mt-10 pt-7 border-t border-gray-200 flex flex-col sm:flex-row justify-between gap-3 text-xs text-gray-400">
+        <p>© 2026 Quantegies. All rights reserved.</p>
+        <p class="font-mono">Careers / Build what comes next.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Job detail modal -->
+  <div id="jobModal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div id="modalBackdrop" class="absolute inset-0 bg-black/55 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+    <div class="absolute inset-0 p-3 sm:p-6 flex items-end sm:items-center justify-center pointer-events-none">
+      <section id="modalPanel" class="pointer-events-auto w-full max-w-5xl max-h-[94vh] bg-white rounded-t-[1.75rem] sm:rounded-[1.75rem] shadow-2xl overflow-hidden translate-y-8 opacity-0 transition-all duration-300">
+        <div class="h-14 px-5 sm:px-7 border-b border-gray-200 flex items-center justify-between bg-white sticky top-0 z-10">
+          <span class="font-mono text-[10px] uppercase tracking-[.18em] text-gray-400">Quantegies / Role Details</span>
+          <button id="closeModal" type="button" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-black hover:text-white transition flex items-center justify-center" aria-label="Close role details">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-scroll overflow-y-auto max-h-[calc(94vh-56px)]">
+          <div id="modalContent"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // General application form used by the two open-application buttons.
+    const GENERAL_APPLICATION_FORM_URL = 'https://forms.office.com/r/GENERAL_APPLICATION_FORM_ID';
+
+    const jobs = [
+      {
+        id: 'quant-researcher',
+        title: 'Quantitative Researcher',
+        applicationUrl: 'https://forms.office.com/r/QUANT_RESEARCHER_FORM_ID',
+        team: 'Research',
+        location: 'Remote — United States',
+        locationGroup: 'United States',
+        type: 'Full-time',
+        salary: '$120,000–$190,000 USD',
+        incentive: 'Performance-based incentive eligible',
+        experience: '3+ years preferred',
+        featured: true,
+        summary: 'Develop, test, and productionize systematic strategies using market microstructure, statistical learning, and robust simulation.',
+        skills: ['Python', 'C++', 'Statistics', 'Market Microstructure'],
+        intro: 'You will work across the full research lifecycle: defining hypotheses, building datasets, designing experiments, challenging assumptions, and translating validated ideas into systems that can operate under real market constraints.',
+        responsibilities: [
+          'Research predictive signals across futures and other liquid markets.',
+          'Design robust experiments with strict controls for leakage, overfitting, regime dependence, and transaction costs.',
+          'Build research tooling and reusable data pipelines for large-scale time-series analysis.',
+          'Partner with execution and engineering teams to move research into controlled production environments.',
+          'Document methodology, failure modes, and live-monitoring requirements.'
+        ],
+        qualifications: [
+          'Strong foundations in probability, statistics, optimization, and time-series analysis.',
+          'Production-level Python; C++ experience is valuable for latency-sensitive work.',
+          'Experience working with large, noisy, non-stationary datasets.',
+          'Ability to communicate research decisions clearly and critique your own results.',
+          'Prior systematic trading or market microstructure experience is strongly preferred.'
+        ],
+        signals: ['Well-designed research notebooks or papers', 'Evidence of rigorous validation', 'Ability to explain failed experiments', 'Strong technical writing']
+      },
+      {
+        id: 'ml-engineer',
+        title: 'Machine Learning Engineer',
+        applicationUrl: 'https://forms.office.com/r/ML_ENGINEER_FORM_ID',
+        team: 'AI & Infrastructure',
+        location: 'Remote — United States / Canada',
+        locationGroup: 'North America',
+        type: 'Full-time',
+        salary: '$130,000–$205,000 USD',
+        incentive: 'Long-term and performance components may apply',
+        experience: '4+ years preferred',
+        featured: true,
+        summary: 'Build training, evaluation, and inference systems for temporal models operating on high-frequency financial data.',
+        skills: ['PyTorch', 'JAX', 'Distributed Systems', 'MLOps'],
+        intro: 'This role sits between research and production. You will create the infrastructure that allows researchers to train, compare, reproduce, deploy, and monitor models without losing the assumptions that made the research valid.',
+        responsibilities: [
+          'Build scalable model training and evaluation pipelines for temporal and sequential architectures.',
+          'Improve experiment reproducibility, dataset versioning, feature lineage, and model governance.',
+          'Design low-latency or high-throughput inference services where required.',
+          'Develop monitoring for distribution shifts, performance degradation, and operational failures.',
+          'Collaborate with researchers on architecture selection and production constraints.'
+        ],
+        qualifications: [
+          'Deep experience with PyTorch, JAX, or comparable modern ML frameworks.',
+          'Strong Python and systems engineering fundamentals.',
+          'Experience with distributed training, GPU workloads, data orchestration, or production inference.',
+          'Ability to reason about experiments, not only infrastructure.',
+          'Experience with transformers, reinforcement learning, or time-series models is helpful.'
+        ],
+        signals: ['Reliable ML platforms you have shipped', 'Clear systems trade-offs', 'Profiling and optimization depth', 'Strong testing discipline']
+      },
+      {
+        id: 'execution-trader',
+        title: 'Strategy Execution Trader',
+        applicationUrl: 'https://forms.office.com/r/EXECUTION_TRADER_FORM_ID',
+        team: 'Trading',
+        location: 'Remote — India',
+        locationGroup: 'India',
+        type: 'Full-time',
+        salary: '₹8,00,000–₹18,00,000 INR',
+        incentive: 'Performance incentives available',
+        experience: 'Early-career candidates considered',
+        featured: true,
+        summary: 'Execute defined strategies, manage live risk, maintain trade plans, and communicate market conditions with discipline.',
+        skills: ['Risk Management', 'Futures', 'Trade Execution', 'Market Structure'],
+        intro: 'You will be responsible for translating strategy rules into disciplined execution. This is not a discretionary “gut-feel” trading role; it requires preparation, precise risk management, active monitoring, and clear communication.',
+        responsibilities: [
+          'Execute approved strategies according to defined entry, exit, and risk parameters.',
+          'Create daily and weekly risk plans and maintain accurate trade journals.',
+          'Monitor open swing positions and communicate material changes promptly.',
+          'Use stop-loss, trailing-stop, and position-management rules consistently.',
+          'Participate in training, review sessions, and post-trade analysis.'
+        ],
+        qualifications: [
+          'Strong accountability and ability to follow a structured process.',
+          'Foundational understanding of futures, order types, leverage, and risk.',
+          'Availability during required market and team windows.',
+          'Calm decision-making under changing market conditions.',
+          'Fresh graduates may apply when they demonstrate preparation and learning ability.'
+        ],
+        signals: ['Detailed trade journals', 'Clear risk thinking', 'Ability to follow rules under pressure', 'Thoughtful market preparation']
+      },
+      {
+        id: 'full-stack-engineer',
+        title: 'Full Stack Software Engineer',
+        applicationUrl: 'https://forms.office.com/r/FULL_STACK_ENGINEER_FORM_ID',
+        team: 'Product Engineering',
+        location: 'Remote — India',
+        locationGroup: 'India',
+        type: 'Full-time',
+        salary: '₹10,00,000–₹24,00,000 INR',
+        incentive: 'Performance review and growth-based increases',
+        experience: '3+ years preferred',
+        featured: false,
+        summary: 'Build reliable product workflows across BAQLABS, internal research systems, and Quantegies operating platforms.',
+        skills: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
+        intro: 'You will own end-to-end product capabilities across frontend, backend, APIs, data models, and deployment. The strongest candidates combine excellent product judgment with the discipline to build reliable systems.',
+        responsibilities: [
+          'Design and ship full-stack features across research and internal operating platforms.',
+          'Build clean APIs, data models, background jobs, and real-time workflows.',
+          'Improve observability, security, testing, and deployment reliability.',
+          'Collaborate with product, research, and trading stakeholders to simplify complex workflows.',
+          'Review code and raise the quality of engineering decisions across the team.'
+        ],
+        qualifications: [
+          'Strong TypeScript and modern React experience.',
+          'Backend experience with Node.js, Express, NestJS, or comparable frameworks.',
+          'Working knowledge of relational databases, queues, caching, and cloud deployment.',
+          'Ability to take ambiguous requirements and turn them into maintainable products.',
+          'Experience with financial, analytical, or data-intensive products is valuable.'
+        ],
+        signals: ['Products you owned end to end', 'Clean architecture examples', 'Strong UI and API judgment', 'Evidence of reliable delivery']
+      },
+      {
+        id: 'frontend-product-engineer',
+        title: 'Frontend Product Engineer',
+        applicationUrl: 'https://forms.office.com/r/FRONTEND_ENGINEER_FORM_ID',
+        team: 'Product Engineering',
+        location: 'Remote — India',
+        locationGroup: 'India',
+        type: 'Full-time',
+        salary: '₹8,00,000–₹18,00,000 INR',
+        incentive: 'Performance review and growth-based increases',
+        experience: '2+ years preferred',
+        featured: false,
+        summary: 'Create fast, precise interfaces for charting, research, collaboration, and decision-making products.',
+        skills: ['React', 'TypeScript', 'Data Visualization', 'Design Systems'],
+        intro: 'You will turn complex financial and operational workflows into interfaces that feel calm, fast, and obvious. This role requires attention to interaction detail, component quality, and the performance demands of data-heavy products.',
+        responsibilities: [
+          'Build responsive interfaces for Atlas Charts, SYNQ, BAQLABS, and internal tools.',
+          'Create reusable components and improve the consistency of the product design system.',
+          'Implement data visualization, real-time updates, and complex stateful workflows.',
+          'Collaborate closely with backend engineers and product stakeholders.',
+          'Profile and improve rendering performance across desktop and mobile experiences.'
+        ],
+        qualifications: [
+          'Strong React, TypeScript, HTML, and CSS fundamentals.',
+          'Excellent attention to spacing, hierarchy, interaction, and responsive behavior.',
+          'Experience with charting, canvas, WebSockets, or data-heavy dashboards is valuable.',
+          'Ability to build polished interfaces from incomplete product direction.',
+          'A portfolio or shipped product examples are strongly preferred.'
+        ],
+        signals: ['Polished shipped interfaces', 'Thoughtful component systems', 'Performance-minded frontend work', 'Strong product intuition']
+      },
+      {
+        id: 'quant-research-intern',
+        title: 'Quantitative Research Intern',
+        applicationUrl: 'https://forms.office.com/r/QUANT_RESEARCH_INTERN_FORM_ID',
+        team: 'Research',
+        location: 'Remote — Global',
+        locationGroup: 'Global',
+        type: 'Internship',
+        salary: '$25–$40 USD / hour',
+        incentive: 'Potential path to a full-time role',
+        experience: 'Students and recent graduates',
+        featured: false,
+        summary: 'Support strategy research, data analysis, simulation, and tooling while learning how ideas are validated for live markets.',
+        skills: ['Python', 'Probability', 'Data Analysis', 'Research Writing'],
+        intro: 'The internship is designed for candidates with strong quantitative foundations who want exposure to real research workflows. You will be expected to contribute, document, and learn quickly—not merely observe.',
+        responsibilities: [
+          'Clean, explore, and analyze financial datasets under researcher guidance.',
+          'Implement and test baseline strategies and research hypotheses.',
+          'Assist with simulation, reporting, and experiment tracking.',
+          'Summarize findings clearly, including limitations and failure cases.',
+          'Build small tools that improve research speed or reproducibility.'
+        ],
+        qualifications: [
+          'Coursework or projects in statistics, mathematics, computer science, physics, engineering, or finance.',
+          'Comfort using Python for analysis.',
+          'Ability to reason carefully and communicate what you do not know.',
+          'Interest in markets and willingness to learn microstructure fundamentals.',
+          'Strong personal projects can substitute for formal experience.'
+        ],
+        signals: ['Independent quantitative projects', 'Well-explained notebooks', 'Mathematical maturity', 'Fast learning and accountability']
+      }
+    ];
+
+    const jobsGrid = document.getElementById('jobsGrid');
+    const searchInput = document.getElementById('searchInput');
+    const teamFilter = document.getElementById('teamFilter');
+    const locationFilter = document.getElementById('locationFilter');
+    const resultCount = document.getElementById('resultCount');
+    const emptyState = document.getElementById('emptyState');
+    const clearFilters = document.getElementById('clearFilters');
+    const roleStat = document.getElementById('roleStat');
+
+    const jobModal = document.getElementById('jobModal');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalPanel = document.getElementById('modalPanel');
+    const modalContent = document.getElementById('modalContent');
+    const closeModalButton = document.getElementById('closeModal');
+    let lastFocusedElement = null;
+
+    function uniqueValues(key) {
+      return [...new Set(jobs.map(job => job[key]))].sort();
+    }
+
+    function populateFilters() {
+      uniqueValues('team').forEach(team => {
+        const option = document.createElement('option');
+        option.value = team;
+        option.textContent = team;
+        teamFilter.appendChild(option);
+      });
+
+      uniqueValues('locationGroup').forEach(location => {
+        const option = document.createElement('option');
+        option.value = location;
+        option.textContent = location;
+        locationFilter.appendChild(option);
+      });
+    }
+
+    function icon(name) {
+      const icons = {
+        pin: '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 21s7-5.18 7-12A7 7 0 1 0 5 9c0 6.82 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3" stroke-width="1.8"/></svg>',
+        briefcase: '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2m-11 4h16M5 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/></svg>',
+        money: '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 9h.01M17 15h.01M9.5 12a2.5 2.5 0 1 0 5 0 2.5 2.5 0 0 0-5 0Z"/></svg>',
+        arrow: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>'
+      };
+      return icons[name] || '';
+    }
+
+    function jobCard(job) {
+      return `
+        <article class="job-card group reveal is-visible relative overflow-hidden border ${job.featured ? 'border-black' : 'border-gray-200'} rounded-2xl bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+          <button type="button" data-job-id="${job.id}" class="job-open text-left w-full p-6 sm:p-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-inset rounded-2xl">
+            <div class="relative z-10 grid lg:grid-cols-[1fr_auto] gap-8 lg:items-center">
+              <div>
+                <div class="flex flex-wrap items-center gap-2 mb-5">
+                  <span class="px-2.5 py-1 rounded-md bg-gray-100 font-mono text-[10px] uppercase tracking-[.12em] text-gray-600">${job.team}</span>
+                  ${job.featured ? '<span class="px-2.5 py-1 rounded-md bg-black text-white font-mono text-[10px] uppercase tracking-[.12em]">Priority hire</span>' : ''}
+                </div>
+
+                <h3 class="text-2xl sm:text-3xl font-semibold tracking-[-.03em] group-hover:underline">${job.title}</h3>
+                <p class="mt-4 text-gray-600 leading-relaxed max-w-3xl">${job.summary}</p>
+
+                <div class="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm text-gray-500">
+                  <span class="inline-flex items-center gap-2">${icon('pin')}${job.location}</span>
+                  <span class="inline-flex items-center gap-2">${icon('briefcase')}${job.type}</span>
+                  <span class="inline-flex items-center gap-2 font-medium text-black">${icon('money')}${job.salary}</span>
+                </div>
+
+                <div class="mt-6 flex flex-wrap gap-2">
+                  ${job.skills.map(skill => `<span class="px-2.5 py-1 rounded-md border border-gray-200 bg-white font-mono text-[11px] text-gray-500">${skill}</span>`).join('')}
+                </div>
+              </div>
+
+              <div class="flex lg:flex-col lg:items-end justify-between gap-4 border-t lg:border-t-0 border-gray-100 pt-5 lg:pt-0">
+                <span class="text-xs text-gray-400 lg:text-right">${job.experience}</span>
+                <span class="w-11 h-11 rounded-full bg-black text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">${icon('arrow')}</span>
+              </div>
+            </div>
+          </button>
+        </article>
+      `;
+    }
+
+    function getFilteredJobs() {
+      const query = searchInput.value.trim().toLowerCase();
+      const team = teamFilter.value;
+      const location = locationFilter.value;
+
+      return jobs.filter(job => {
+        const haystack = [job.title, job.team, job.location, job.summary, ...job.skills].join(' ').toLowerCase();
+        const matchesQuery = !query || haystack.includes(query);
+        const matchesTeam = team === 'all' || job.team === team;
+        const matchesLocation = location === 'all' || job.locationGroup === location;
+        return matchesQuery && matchesTeam && matchesLocation;
+      });
+    }
+
+    function renderJobs() {
+      const filtered = getFilteredJobs();
+      jobsGrid.innerHTML = filtered.map(jobCard).join('');
+      resultCount.textContent = `${filtered.length} role${filtered.length === 1 ? '' : 's'} found`;
+      emptyState.classList.toggle('hidden', filtered.length !== 0);
+      jobsGrid.classList.toggle('hidden', filtered.length === 0);
+
+      document.querySelectorAll('.job-open').forEach(button => {
+        button.addEventListener('click', () => openJob(button.dataset.jobId));
+      });
+
+      document.querySelectorAll('.job-card').forEach(card => {
+        card.addEventListener('pointermove', event => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`);
+          card.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);
+        });
+      });
+    }
+
+    function resetFilters() {
+      searchInput.value = '';
+      teamFilter.value = 'all';
+      locationFilter.value = 'all';
+      renderJobs();
+    }
+    window.resetFilters = resetFilters;
+
+    function openJob(id) {
+      const job = jobs.find(item => item.id === id);
+      if (!job) return;
+
+      lastFocusedElement = document.activeElement;
+      modalContent.innerHTML = `
+        <div class="p-6 sm:p-9 lg:p-11">
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-md bg-gray-100 font-mono text-[10px] uppercase tracking-[.12em] text-gray-600">${job.team}</span>
+            <span class="px-2.5 py-1 rounded-md bg-gray-100 font-mono text-[10px] uppercase tracking-[.12em] text-gray-600">${job.type}</span>
+          </div>
+
+          <div class="mt-6 grid lg:grid-cols-[1fr_280px] gap-10 lg:gap-14">
+            <div>
+              <h2 id="modalTitle" class="text-4xl sm:text-5xl font-semibold tracking-[-.045em]">${job.title}</h2>
+              <p class="mt-6 text-lg text-gray-600 leading-relaxed">${job.intro}</p>
+
+              <div class="mt-10 grid sm:grid-cols-2 gap-8">
+                <section>
+                  <h3 class="text-sm font-semibold uppercase tracking-[.12em]">What you will do</h3>
+                  <ul class="mt-5 space-y-4">
+                    ${job.responsibilities.map(item => `<li class="flex gap-3 text-sm text-gray-600 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-black shrink-0"></span><span>${item}</span></li>`).join('')}
+                  </ul>
+                </section>
+                <section>
+                  <h3 class="text-sm font-semibold uppercase tracking-[.12em]">What we are looking for</h3>
+                  <ul class="mt-5 space-y-4">
+                    ${job.qualifications.map(item => `<li class="flex gap-3 text-sm text-gray-600 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-black shrink-0"></span><span>${item}</span></li>`).join('')}
+                  </ul>
+                </section>
+              </div>
+
+              <section class="mt-12 pt-9 border-t border-gray-200">
+                <h3 class="text-sm font-semibold uppercase tracking-[.12em]">Strong application signals</h3>
+                <div class="mt-5 flex flex-wrap gap-2">
+                  ${job.signals.map(item => `<span class="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-600">${item}</span>`).join('')}
+                </div>
+              </section>
+            </div>
+
+            <aside class="lg:sticky lg:top-5 self-start rounded-2xl border border-gray-200 bg-gray-50 p-6">
+              <dl class="space-y-5">
+                <div>
+                  <dt class="font-mono text-[10px] uppercase tracking-[.14em] text-gray-400">Location</dt>
+                  <dd class="mt-1.5 text-sm font-medium">${job.location}</dd>
+                </div>
+                <div>
+                  <dt class="font-mono text-[10px] uppercase tracking-[.14em] text-gray-400">Compensation</dt>
+                  <dd class="mt-1.5 text-sm font-medium">${job.salary}</dd>
+                  <dd class="mt-1 text-xs text-gray-500">${job.incentive}</dd>
+                </div>
+                <div>
+                  <dt class="font-mono text-[10px] uppercase tracking-[.14em] text-gray-400">Experience</dt>
+                  <dd class="mt-1.5 text-sm font-medium">${job.experience}</dd>
+                </div>
+                <div>
+                  <dt class="font-mono text-[10px] uppercase tracking-[.14em] text-gray-400">Core skills</dt>
+                  <dd class="mt-2 flex flex-wrap gap-1.5">${job.skills.map(skill => `<span class="px-2 py-1 rounded bg-white border border-gray-200 font-mono text-[10px] text-gray-600">${skill}</span>`).join('')}</dd>
+                </div>
+              </dl>
+
+              <a href="${job.applicationUrl}" target="_blank" rel="noopener noreferrer" aria-label="Apply for ${job.title}" class="mt-7 w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-black text-white font-medium hover:bg-gray-800 hover:-translate-y-0.5 transition-all">
+                Apply for this role
+                ${icon('arrow')}
+              </a>
+              <p class="mt-3 text-[11px] leading-relaxed text-gray-400 text-center">This application opens the Microsoft Form assigned specifically to this role.</p>
+            </aside>
+          </div>
+        </div>
+      `;
+
+      jobModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => {
+        modalBackdrop.classList.remove('opacity-0');
+        modalPanel.classList.remove('translate-y-8', 'opacity-0');
+      });
+      closeModalButton.focus();
+      history.replaceState(null, '', `#${job.id}`);
+    }
+
+    function closeJobModal() {
+      modalBackdrop.classList.add('opacity-0');
+      modalPanel.classList.add('translate-y-8', 'opacity-0');
+      setTimeout(() => {
+        jobModal.classList.add('hidden');
+        document.body.style.overflow = '';
+        if (lastFocusedElement) lastFocusedElement.focus();
+      }, 280);
+      history.replaceState(null, '', '#open-roles');
+    }
+
+    searchInput.addEventListener('input', renderJobs);
+    teamFilter.addEventListener('change', renderJobs);
+    locationFilter.addEventListener('change', renderJobs);
+    clearFilters.addEventListener('click', resetFilters);
+    closeModalButton.addEventListener('click', closeJobModal);
+    modalBackdrop.addEventListener('click', closeJobModal);
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !jobModal.classList.contains('hidden')) closeJobModal();
+    });
+
+    document.querySelectorAll('[data-application-form]').forEach(link => {
+      link.href = GENERAL_APPLICATION_FORM_URL;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    });
+
+    populateFilters();
+    if (roleStat) roleStat.textContent = jobs.length;
+    renderJobs();
+
+    // Open a role directly from its URL hash.
+    const initialHash = window.location.hash.replace('#', '');
+    if (jobs.some(job => job.id === initialHash)) {
+      setTimeout(() => openJob(initialHash), 250);
+    }
+
+    // Scroll reveal.
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
+
+    // Subtle interactive canvas background.
+    const canvas = document.getElementById('careerCanvas');
+    const context = canvas.getContext('2d');
+    let canvasWidth = 0;
+    let canvasHeight = 0;
+    let points = [];
+    const mouse = { x: null, y: null };
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = canvas.getBoundingClientRect();
+      canvasWidth = rect.width;
+      canvasHeight = rect.height;
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      points = Array.from({ length: Math.min(72, Math.floor(canvasWidth / 18)) }, () => ({
+        x: Math.random() * canvasWidth,
+        y: Math.random() * canvasHeight,
+        vx: (Math.random() - .5) * .16,
+        vy: (Math.random() - .5) * .16,
+        radius: Math.random() * 1.4 + .6
+      }));
+    }
+
+    function drawCanvas() {
+      context.clearRect(0, 0, canvasWidth, canvasHeight);
+
+      points.forEach(point => {
+        point.x += point.vx;
+        point.y += point.vy;
+        if (point.x < 0 || point.x > canvasWidth) point.vx *= -1;
+        if (point.y < 0 || point.y > canvasHeight) point.vy *= -1;
+
+        if (mouse.x !== null) {
+          const dx = point.x - mouse.x;
+          const dy = point.y - mouse.y;
+          const distance = Math.hypot(dx, dy);
+          if (distance < 160 && distance > 0) {
+            point.x += (dx / distance) * .16;
+            point.y += (dy / distance) * .16;
+          }
+        }
+
+        context.beginPath();
+        context.arc(point.x, point.y, point.radius, 0, Math.PI * 2);
+        context.fillStyle = 'rgba(0,0,0,.16)';
+        context.fill();
+      });
+
+      for (let i = 0; i < points.length; i++) {
+        for (let j = i + 1; j < points.length; j++) {
+          const distance = Math.hypot(points[i].x - points[j].x, points[i].y - points[j].y);
+          if (distance < 125) {
+            context.beginPath();
+            context.moveTo(points[i].x, points[i].y);
+            context.lineTo(points[j].x, points[j].y);
+            context.strokeStyle = `rgba(0,0,0,${(1 - distance / 125) * .08})`;
+            context.lineWidth = 1;
+            context.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(drawCanvas);
+    }
+
+    canvas.addEventListener('pointermove', event => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = event.clientX - rect.left;
+      mouse.y = event.clientY - rect.top;
+    });
+    canvas.addEventListener('pointerleave', () => { mouse.x = null; mouse.y = null; });
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    drawCanvas();
+  </script>
+</body>
+</html>
