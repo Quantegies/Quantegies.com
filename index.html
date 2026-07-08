@@ -76,26 +76,59 @@
 
 <body class="bg-white text-brand-black antialiased selection:bg-black selection:text-white">
 
-  <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2">
-        <img src="Quantegies-logo.png" alt="Quantegies Logo" class="h-14 w-auto" />
-      </a>
+ <!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2">
+      <img src="Quantegies-logo.png" alt="Quantegies Logo" class="h-14 w-auto" />
+    </a>
 
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-500">
-        <a href="#ourthesis" class="hover:text-black transition-colors">Our Thesis</a>
-        <a href="#capabilities" class="hover:text-black transition-colors">Capabilities</a>
-        <a href="#baqlabs" class="hover:text-black transition-colors">Baqlabs</a>
-        <a href="/careers.html" class="hover:text-black transition-colors">Careers</a>
-      </div>
+    <!-- Desktop Links -->
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-500">
+      <a href="#ourthesis" class="hover:text-black transition-colors">Our Thesis</a>
+      <a href="#capabilities" class="hover:text-black transition-colors">Capabilities</a>
+      <a href="#baqlabs" class="hover:text-black transition-colors">Baqlabs</a>
+      <a href="/careers.html" class="hover:text-black transition-colors">Careers</a>
+    </div>
+
+    <!-- Desktop Contact -->
+    <a href="mailto:team@quantegies.com"
+       class="hidden md:inline-flex text-sm font-medium bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition-all transform hover:-translate-y-0.5 shadow-sm">
+      Contact
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button
+      id="mobileMenuBtn"
+      type="button"
+      class="md:hidden flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-black shadow-sm transition-all"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+    >
+      <span id="mobileMenuIcon" class="text-lg font-semibold leading-none">O</span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobileMenu"
+    class="hidden md:hidden border-t border-gray-200 bg-white/95 backdrop-blur-xl shadow-lg"
+  >
+    <div class="px-6 py-5 flex flex-col gap-4 text-sm font-medium text-gray-600">
+      <a href="#ourthesis" class="hover:text-black transition-colors mobile-link">Our Thesis</a>
+      <a href="#capabilities" class="hover:text-black transition-colors mobile-link">Capabilities</a>
+      <a href="#baqlabs" class="hover:text-black transition-colors mobile-link">Baqlabs</a>
+      <a href="/careers.html" class="hover:text-black transition-colors mobile-link">Careers</a>
 
       <a href="mailto:team@quantegies.com"
-         class="text-sm font-medium bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition-all transform hover:-translate-y-0.5 shadow-sm">
+         class="mt-2 inline-flex justify-center text-sm font-medium bg-black text-white px-5 py-2.5 rounded-full hover:bg-gray-800 transition-all shadow-sm">
         Contact
       </a>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- Hero Section -->
   <section class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
@@ -653,7 +686,39 @@
     resize();
     animate();
   </script>
+  <!-- Your page content above -->
 
+  <script>
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const menuClosedIcon = document.getElementById("menuClosedIcon");
+    const menuOpenIcon = document.getElementById("menuOpenIcon");
+    const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
+
+    mobileMenuBtn.addEventListener("click", () => {
+      const isOpen = !mobileMenu.classList.contains("hidden");
+
+      mobileMenu.classList.toggle("hidden");
+      menuClosedIcon.classList.toggle("hidden");
+      menuOpenIcon.classList.toggle("hidden");
+
+      mobileMenuBtn.setAttribute("aria-expanded", String(!isOpen));
+      mobileMenuBtn.setAttribute(
+        "aria-label",
+        isOpen ? "Open mobile menu" : "Close mobile menu"
+      );
+    });
+
+    mobileMenuLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        menuClosedIcon.classList.remove("hidden");
+        menuOpenIcon.classList.add("hidden");
+        mobileMenuBtn.setAttribute("aria-expanded", "false");
+        mobileMenuBtn.setAttribute("aria-label", "Open mobile menu");
+      });
+    });
+  </script>
 </body>
 </html>
 
